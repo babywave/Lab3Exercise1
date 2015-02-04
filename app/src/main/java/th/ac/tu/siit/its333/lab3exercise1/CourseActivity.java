@@ -4,6 +4,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.content.Intent;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 
 public class CourseActivity extends ActionBarActivity {
@@ -20,6 +25,20 @@ public class CourseActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_course, menu);
         return true;
+    }
+
+    public void retClicked(View v) {
+        Intent res = new Intent();
+        EditText etcode = (EditText)findViewById(R.id.etCode);
+        EditText etcr = (EditText)findViewById(R.id.etCR);
+
+        RadioGroup pp = (RadioGroup) findViewById(R.id.radio);
+        RadioButton etgr = (RadioButton)findViewById(pp.getCheckedRadioButtonId());
+        res.putExtra("code", etcode.getText().toString());
+        res.putExtra("credit", Integer.parseInt(etcr.getText().toString()));
+        res.putExtra("grade", etgr.getText().toString());
+        setResult(RESULT_OK, res);
+        finish();
     }
 
     @Override
